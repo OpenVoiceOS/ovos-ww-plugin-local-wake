@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-ww-plugin-local-wake"
+dynamic = ["version"]
+description = "OVOS wake word plugin for local-wake: wake words from a few recordings, no training"
+readme = "README.md"
+license = "MIT"
+authors = [{name = "JarbasAi", email = "jarbasai@mailfence.com"}]
+requires-python = ">=3.10"
+keywords = ["mycroft", "ovos", "plugin", "wake", "word", "hotword", "local-wake", "dtw", "few-shot"]
+dependencies = [
+    "onnxruntime>=1.20",
+    "numpy",
+    "ovos-plugin-manager>=2.1.0,<3.0.0",
+    "ovos-utils>=0.0.14,<1.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest<10",
+    "ovoscope>=1.9.0a1",
+    "ovos-dinkum-listener>=0.11.0a2",
+]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-ww-plugin-local-wake"
+Repository = "https://github.com/OpenVoiceOS/ovos-ww-plugin-local-wake"
+
+[project.entry-points."opm.wake_word"]
+ovos-ww-plugin-local-wake = "ovos_ww_plugin_local_wake:LocalWakeHotwordPlugin"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["ovos_ww_plugin_local_wake*"]
+
+[tool.setuptools.package-data]
+ovos_ww_plugin_local_wake = ["models/*.onnx"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ovos_ww_plugin_local_wake.version.__version__"}

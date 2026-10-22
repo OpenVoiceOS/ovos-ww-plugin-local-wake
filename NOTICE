@@ -1,0 +1,15 @@
+ovos-ww-plugin-local-wake
+
+The detection method and the feature extraction are adapted from local-wake
+(https://github.com/st-matskevich/local-wake), Copyright (c) 2025
+st-matskevich, MIT License. Changes:
+- The comparison runs on audio chunks from the OVOS listener.
+- The DTW is computed with numpy instead of librosa.
+- Recordings are trimmed of silence when they load, and a recording
+  shorter than the model window is widened with its own surrounding audio.
+- A buffer much quieter than the recordings is not compared.
+- The buffer length follows the longest recording.
+
+models/speech-embedding.onnx is Google's speech-embedding model
+(https://www.kaggle.com/models/google/speech-embedding), Apache License 2.0,
+in the ONNX conversion shipped by local-wake.
